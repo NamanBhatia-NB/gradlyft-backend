@@ -1,0 +1,271 @@
+{
+  "info": {
+    "name": "Gradlyft Backend API",
+    "_postman_id": "gradlyft-backend-api",
+    "description": "Postman Collection for testing Gradlyft backend (Phases 1\u20134 + analytics)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Signup (Student/Employer/Admin)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/api/signup",
+          "host": [
+            "localhost:3000"
+          ],
+          "path": [
+            "api",
+            "signup"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"admin@gradlyft.com\",\n  \"password\": \"admin123\",\n  \"role\": \"ADMIN\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Login (NextAuth credentials)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/api/auth/callback/credentials",
+          "host": [
+            "localhost:3000"
+          ],
+          "path": [
+            "api",
+            "auth",
+            "callback",
+            "credentials"
+          ]
+        },
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "email",
+              "value": "admin@gradlyft.com"
+            },
+            {
+              "key": "password",
+              "value": "admin123"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Post Job (EMPLOYER)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <JWT_HERE>"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/api/jobs",
+          "host": [
+            "localhost:3000"
+          ],
+          "path": [
+            "api",
+            "jobs"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Frontend Intern\",\n  \"description\": \"React.js internship\",\n  \"type\": \"Internship\",\n  \"duration\": \"3 months\",\n  \"location\": \"Remote\",\n  \"stipend\": \"5000\",\n  \"skills\": \"React, JS\",\n  \"applyMethod\": \"mailto:hr@company.com\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Bookmark Toggle (STUDENT)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <JWT_HERE>"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/api/bookmarks",
+          "host": [
+            "localhost:3000"
+          ],
+          "path": [
+            "api",
+            "bookmarks"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"jobId\": \"<REPLACE_WITH_JOB_ID>\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Register for Event (STUDENT)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <JWT_HERE>"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/api/events/register",
+          "host": [
+            "localhost:3000"
+          ],
+          "path": [
+            "api",
+            "events",
+            "register"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"eventId\": \"<REPLACE_WITH_EVENT_ID>\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Track Session",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <JWT_HERE>"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/api/track",
+          "host": [
+            "localhost:3000"
+          ],
+          "path": [
+            "api",
+            "track"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"page\": \"/dashboard\",\n  \"action\": \"view\",\n  \"duration\": 75\n}"
+        }
+      }
+    },
+    {
+      "name": "Get All Sessions (ADMIN)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <JWT_HERE>"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/api/admin/analytics",
+          "host": [
+            "localhost:3000"
+          ],
+          "path": [
+            "api",
+            "admin",
+            "analytics"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Analytics Summary (ADMIN)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <JWT_HERE>"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/api/admin/analytics/summary",
+          "host": [
+            "localhost:3000"
+          ],
+          "path": [
+            "api",
+            "admin",
+            "analytics",
+            "summary"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Create Upskilling Resource (ADMIN)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <JWT_HERE>"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/api/upskilling",
+          "host": [
+            "localhost:3000"
+          ],
+          "path": [
+            "api",
+            "upskilling"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Resume Basics\",\n  \"category\": \"Resume\",\n  \"type\": \"PDF\",\n  \"fileUrl\": \"https://example.com/resume.pdf\"\n}"
+        }
+      }
+    }
+  ]
+}
